@@ -61,4 +61,26 @@ class DataFlowTargetsTest {
             () -> DataFlowTargets.bonus(
                 new int[]{1, 1}, -1));
     }
+@Test
+void bonusZeroThresholdEmptyAttendance() {
+    assertEquals(5, DataFlowTargets.bonus(new int[]{}, 0));
+}
+
+@Test
+void bonusStreakResetsAndRestarts() {
+    assertEquals(8, DataFlowTargets.bonus(
+        new int[]{1, 1, 0, 1, 1, 1, 1, 1}, 7));
+}
+
+@Test
+void bonusStreakWithoutThresholdReward() {
+    assertEquals(3, DataFlowTargets.bonus(
+        new int[]{1, 1, 1, 1, 1}, 6));
+}
+
+@Test
+void bonusStreakExactlyFour() {
+    assertEquals(5, DataFlowTargets.bonus(
+        new int[]{1, 1, 1, 1}, 4));
+}
 }
