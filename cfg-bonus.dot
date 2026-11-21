@@ -45,33 +45,36 @@ digraph BonusCFG {
     extra [label="54: score = score + 3"];
     end [label="56: return score", shape=oval, fillcolor="#DDF5DF"];
 
-    start -> check;
+        start -> check [label="bonusNull, bonusNormal"];
 
     check -> error [label="True: bonusNull,\nbonusNegativeThreshold"];
     check -> init [label="False: bonusNormal,\nbonusWithStreak"];
 
-    init -> loop;
+    init -> loop [label="bonusNormal"];
 
-    loop -> presentCheck [label="Next: bonusNormal"];
-    loop -> scoreInit [label="Exit: bonusEmpty"];
+    loop -> presentCheck [label="Next: bonusNormal,\nbonusWithStreak"];
+    loop -> scoreInit [label="Exit: bonusEmpty,\nbonusNormal"];
 
     presentCheck -> count [label="True: bonusWithStreak"];
     presentCheck -> reset [label="False: bonusResetThenPresentDU"];
 
-    count -> bestCheck;
-    bestCheck -> updateBest [label="True: bonusWithStreak"];
-    bestCheck -> loop [label="False: bonusStreakExactlyFour"];
-    updateBest -> loop;
+    count -> bestCheck [label="bonusWithStreak"];
 
+    bestCheck -> updateBest [label="True: bonusWithStreak"];
+    bestCheck -> loop [label="False: bonusStreakResetsAndRestarts"];
+
+    updateBest -> loop [label="bonusWithStreak"];
     reset -> loop [label="bonusStreakResetsAndRestarts"];
 
-    scoreInit -> thresholdCheck;
+    scoreInit -> thresholdCheck [label="bonusNormal"];
 
     thresholdCheck -> reward [label="True: bonusThresholdOnlyDU"];
     thresholdCheck -> streakCheck [label="False: bonusStreakOnlyDU"];
-    reward -> streakCheck;
+
+    reward -> streakCheck [label="bonusThresholdOnlyDU"];
 
     streakCheck -> extra [label="True: bonusWithStreak"];
     streakCheck -> end [label="False: bonusNoReward"];
-    extra -> end;
+
+    extra -> end [label="bonusWithStreak"];
 }
