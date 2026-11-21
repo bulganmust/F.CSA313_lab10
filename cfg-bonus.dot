@@ -1,0 +1,77 @@
+
+digraph BonusCFG {
+    graph [
+        label="bonus() - Control Flow Graph\nF.CSA313 Lab 10",
+        labelloc=t,
+        fontsize=20,
+        fontname="Arial",
+        rankdir=TB,
+        nodesep=0.55,
+        ranksep=0.75
+    ];
+
+    node [
+        shape=box,
+        style="rounded,filled",
+        fillcolor="#EAF2FF",
+        color="#5275A0",
+        fontname="Arial",
+        fontsize=11
+    ];
+
+    edge [
+        fontname="Arial",
+        fontsize=9,
+        color="#555555"
+    ];
+
+    start [label="31: bonus(attendance, threshold)", shape=oval];
+    check [label="32: attendance == null || threshold < 0", shape=diamond, fillcolor="#FFF0C2"];
+    error [label="33: throw IllegalArgumentException", fillcolor="#FFE1E1"];
+
+    init [label="35: present = 0\n36: streak = 0\n37: best = 0"];
+    loop [label="38: for (int a : attendance)", shape=diamond, fillcolor="#FFF0C2"];
+    presentCheck [label="39: a > 0?", shape=diamond, fillcolor="#FFF0C2"];
+
+    count [label="40: present = present + 1\n41: streak = streak + 1"];
+    bestCheck [label="42: streak > best?", shape=diamond, fillcolor="#FFF0C2"];
+    updateBest [label="43: best = streak"];
+    reset [label="46: streak = 0"];
+
+    scoreInit [label="49: score = 0"];
+    thresholdCheck [label="50: present >= threshold?", shape=diamond, fillcolor="#FFF0C2"];
+    reward [label="51: score = 5"];
+    streakCheck [label="53: best >= 5?", shape=diamond, fillcolor="#FFF0C2"];
+    extra [label="54: score = score + 3"];
+    end [label="56: return score", shape=oval, fillcolor="#DDF5DF"];
+
+    start -> check;
+
+    check -> error [label="True: bonusNull,\nbonusNegativeThreshold"];
+    check -> init [label="False: bonusNormal,\nbonusWithStreak"];
+
+    init -> loop;
+
+    loop -> presentCheck [label="Next: bonusNormal"];
+    loop -> scoreInit [label="Exit: bonusEmpty"];
+
+    presentCheck -> count [label="True: bonusWithStreak"];
+    presentCheck -> reset [label="False: bonusResetThenPresentDU"];
+
+    count -> bestCheck;
+    bestCheck -> updateBest [label="True: bonusWithStreak"];
+    bestCheck -> loop [label="False: bonusStreakExactlyFour"];
+    updateBest -> loop;
+
+    reset -> loop [label="bonusStreakResetsAndRestarts"];
+
+    scoreInit -> thresholdCheck;
+
+    thresholdCheck -> reward [label="True: bonusThresholdOnlyDU"];
+    thresholdCheck -> streakCheck [label="False: bonusStreakOnlyDU"];
+    reward -> streakCheck;
+
+    streakCheck -> extra [label="True: bonusWithStreak"];
+    streakCheck -> end [label="False: bonusNoReward"];
+    extra -> end;
+}
