@@ -93,4 +93,45 @@ class DataFlowTargetsTest {
         assertEquals(5, DataFlowTargets.bonus(
             new int[]{1, 1, 1, 1}, 4));
     }
+    
+    // All-DU-Pairs: gcd-ийн давталтын дараах x, y
+    @Test
+    void gcdMultipleIterationsDU() {
+        assertEquals(6, DataFlowTargets.gcd(48, 18));
+    }
+
+    // All-DU-Pairs: gcd-ийн давталтгүй зам
+    @Test
+    void gcdNoIterationDU() {
+        assertEquals(9, DataFlowTargets.gcd(9, 0));
+    }
+
+    // All-DU-Pairs: streak-ийн 46 -> 41 зам
+    @Test
+    void bonusResetThenPresentDU() {
+        assertEquals(0, DataFlowTargets.bonus(
+            new int[]{0, 1}, 2));
+    }
+
+    // All-DU-Pairs: reset-ийн дараа давталт дуусах
+    @Test
+    void bonusEndsWithAbsenceDU() {
+        assertEquals(0, DataFlowTargets.bonus(
+            new int[]{1, 0}, 2));
+    }
+
+    // All-DU-Pairs: score-ийн 49 -> 54 -> 56 зам
+    @Test
+    void bonusStreakOnlyDU() {
+        assertEquals(3, DataFlowTargets.bonus(
+            new int[]{1, 1, 1, 1, 1}, 6));
+    }
+
+    // All-DU-Pairs: score-ийн 51 -> 56 зам
+    @Test
+    void bonusThresholdOnlyDU() {
+        assertEquals(5, DataFlowTargets.bonus(
+            new int[]{1, 0, 1}, 2));
+    }
+
 }
