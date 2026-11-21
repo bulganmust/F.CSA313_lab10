@@ -133,5 +133,10 @@ class DataFlowTargetsTest {
         assertEquals(5, DataFlowTargets.bonus(
             new int[]{1, 0, 1}, 2));
     }
+  @Test
+void bonusKillsM2WrongBest() {
+    assertEquals(5, DataFlowTargets.bonus(
+        new int[]{1, 1, 0, 1, 1, 1, 1}, 6));
+}
 
 }

@@ -32,11 +32,11 @@
 [[1;34mINFO[m]  T E S T S
 [[1;34mINFO[m] -------------------------------------------------------
 [[1;34mINFO[m] Running mn.edu.must.sqat.[1mDataFlowTargetsTest[m
-[[1;34mINFO[m] [1;32mTests run: [0;1;32m20[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.195 s -- in mn.edu.must.sqat.[1mDataFlowTargetsTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m21[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.207 s -- in mn.edu.must.sqat.[1mDataFlowTargetsTest[m
 [[1;34mINFO[m] 
 [[1;34mINFO[m] Results:
 [[1;34mINFO[m] 
-[[1;34mINFO[m] [1;32mTests run: 20, Failures: 0, Errors: 0, Skipped: 0[m
+[[1;34mINFO[m] [1;32mTests run: 21, Failures: 0, Errors: 0, Skipped: 0[m
 [[1;34mINFO[m] 
 [[1;34mINFO[m] 
 [[1;34mINFO[m] [1m--- [0;32mjar:3.1.2:jar[m [1m(default-jar)[m @ [36mlab10-dataflow[0;1m ---[m
@@ -48,6 +48,6 @@
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
 [[1;34mINFO[m] [1;32mBUILD SUCCESS[m
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-[[1;34mINFO[m] Total time:  4.891 s
-[[1;34mINFO[m] Finished at: 2026-11-21T13:42:47+08:00
+[[1;34mINFO[m] Total time:  5.178 s
+[[1;34mINFO[m] Finished at: 2026-11-21T14:20:31+08:00
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
